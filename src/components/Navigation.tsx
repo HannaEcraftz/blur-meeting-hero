@@ -6,11 +6,28 @@ const navLinks = [
   { label: "Features", href: "#features" },
   { label: "Integrations", href: "#integrations" },
   { label: "Pricing", href: "#pricing" },
-  { label: "Resources", href: "#resources" },
+  { label: "Resources", href: "#trusted" },
 ];
 
 export const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setMobileMenuOpen(false);
+    }
+  };
+  
+  const handleGetStarted = () => {
+    // Scroll to pricing section
+    const pricingSection = document.querySelector('#pricing');
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
   
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-background/80 border-b border-border">
@@ -31,7 +48,8 @@ export const Navigation = () => {
               <a 
                 key={index}
                 href={link.href}
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="text-foreground hover:text-primary transition-colors font-medium cursor-pointer"
               >
                 {link.label}
               </a>
@@ -40,8 +58,8 @@ export const Navigation = () => {
           
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost">Sign In</Button>
-            <Button variant="hero">Get Started</Button>
+            <Button variant="ghost" onClick={handleGetStarted}>Sign In</Button>
+            <Button variant="hero" onClick={handleGetStarted}>Get Started</Button>
           </div>
           
           {/* Mobile Menu Button */}
@@ -61,15 +79,15 @@ export const Navigation = () => {
                 <a 
                   key={index}
                   href={link.href}
-                  className="text-foreground hover:text-primary transition-colors font-medium py-2"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="text-foreground hover:text-primary transition-colors font-medium py-2 cursor-pointer"
                 >
                   {link.label}
                 </a>
               ))}
               <div className="flex flex-col gap-2 pt-4">
-                <Button variant="ghost" className="w-full">Sign In</Button>
-                <Button variant="hero" className="w-full">Get Started</Button>
+                <Button variant="ghost" className="w-full" onClick={handleGetStarted}>Sign In</Button>
+                <Button variant="hero" className="w-full" onClick={handleGetStarted}>Get Started</Button>
               </div>
             </div>
           </div>

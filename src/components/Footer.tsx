@@ -8,13 +8,21 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Mail, href: "#", label: "Email" },
+  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+  { icon: Github, href: "https://github.com", label: "GitHub" },
+  { icon: Mail, href: "mailto:hello@aimeeting.com", label: "Email" },
 ];
 
 export const Footer = () => {
+  const handleLinkClick = (link: string) => {
+    console.log(`Footer link clicked: ${link}`);
+  };
+
+  const handleSocialClick = (social: string) => {
+    console.log(`Social link clicked: ${social}`);
+  };
+
   return (
     <footer className="relative overflow-hidden pt-20 pb-10"
             style={{ background: 'var(--gradient-primary)' }}>
@@ -35,7 +43,10 @@ export const Footer = () => {
                 <a
                   key={index}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
+                  onClick={() => handleSocialClick(social.label)}
                   className="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110"
                 >
                   <social.icon className="h-5 w-5 text-white" />
@@ -53,7 +64,11 @@ export const Footer = () => {
                   <li key={linkIndex}>
                     <a 
                       href="#"
-                      className="text-white/70 hover:text-white transition-colors duration-300"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleLinkClick(link);
+                      }}
+                      className="text-white/70 hover:text-white transition-colors duration-300 cursor-pointer"
                     >
                       {link}
                     </a>
@@ -71,13 +86,25 @@ export const Footer = () => {
               © 2025 AI Meeting Assistant. All rights reserved.
             </p>
             <div className="flex gap-6">
-              <a href="#" className="text-white/70 hover:text-white text-sm transition-colors">
+              <a 
+                href="#" 
+                onClick={(e) => { e.preventDefault(); handleLinkClick("Privacy Policy"); }}
+                className="text-white/70 hover:text-white text-sm transition-colors cursor-pointer"
+              >
                 Privacy Policy
               </a>
-              <a href="#" className="text-white/70 hover:text-white text-sm transition-colors">
+              <a 
+                href="#" 
+                onClick={(e) => { e.preventDefault(); handleLinkClick("Terms of Service"); }}
+                className="text-white/70 hover:text-white text-sm transition-colors cursor-pointer"
+              >
                 Terms of Service
               </a>
-              <a href="#" className="text-white/70 hover:text-white text-sm transition-colors">
+              <a 
+                href="#" 
+                onClick={(e) => { e.preventDefault(); handleLinkClick("Cookie Policy"); }}
+                className="text-white/70 hover:text-white text-sm transition-colors cursor-pointer"
+              >
                 Cookie Policy
               </a>
             </div>

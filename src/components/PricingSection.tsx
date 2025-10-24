@@ -38,8 +38,13 @@ const plans = [
 ];
 
 export const PricingSection = () => {
+  const handlePlanSelect = (planName: string) => {
+    console.log(`Selected plan: ${planName}`);
+    // You can add checkout or signup logic here
+  };
+
   return (
-    <section className="py-24 bg-background">
+    <section id="pricing" className="py-24 bg-background scroll-mt-16">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
@@ -95,6 +100,7 @@ export const PricingSection = () => {
                 variant={plan.popular ? "hero" : "hero-outline"} 
                 size="lg" 
                 className="w-full group"
+                onClick={() => handlePlanSelect(plan.name)}
               >
                 {plan.cta}
                 <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>

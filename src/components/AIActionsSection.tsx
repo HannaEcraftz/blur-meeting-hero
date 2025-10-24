@@ -28,8 +28,13 @@ const actions = [
 ];
 
 export const AIActionsSection = () => {
+  const handleActionClick = (title: string) => {
+    console.log(`Clicked on: ${title}`);
+    // You can add navigation or modal logic here
+  };
+
   return (
-    <section className="py-24" style={{ background: 'var(--gradient-hero)' }}>
+    <section id="actions" className="py-24 scroll-mt-16" style={{ background: 'var(--gradient-hero)' }}>
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
@@ -44,6 +49,7 @@ export const AIActionsSection = () => {
           {actions.map((action, index) => (
             <div 
               key={index}
+              onClick={() => handleActionClick(action.title)}
               className="glass-card rounded-2xl p-6 hover:shadow-hover transition-all duration-300 animate-scale-in cursor-pointer group"
               style={{ animationDelay: `${index * 100}ms` }}
             >

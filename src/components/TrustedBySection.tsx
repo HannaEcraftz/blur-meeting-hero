@@ -29,8 +29,16 @@ const testimonials = [
 ];
 
 export const TrustedBySection = () => {
+  const handleCompanyClick = (company: string) => {
+    console.log(`Clicked on: ${company}`);
+  };
+
+  const handleTestimonialClick = (name: string) => {
+    console.log(`Clicked testimonial from: ${name}`);
+  };
+
   return (
-    <section className="py-24 bg-background">
+    <section id="trusted" className="py-24 bg-background scroll-mt-16">
       <div className="container mx-auto px-6">
         {/* Trusted By */}
         <div className="text-center mb-16">
@@ -41,6 +49,7 @@ export const TrustedBySection = () => {
             {companies.map((company, index) => (
               <div 
                 key={index}
+                onClick={() => handleCompanyClick(company)}
                 className="text-2xl font-bold text-muted-foreground/40 hover:text-primary transition-colors cursor-pointer"
               >
                 {company}
@@ -59,6 +68,7 @@ export const TrustedBySection = () => {
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index}
+                onClick={() => handleTestimonialClick(testimonial.name)}
                 className="glass-card rounded-2xl p-8 hover:shadow-hover transition-all duration-300 animate-fade-in cursor-pointer"
                 style={{ animationDelay: `${index * 150}ms` }}
               >

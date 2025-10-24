@@ -26,7 +26,7 @@ const features = [
 
 export const FeatureHighlights = () => {
   return (
-    <section className="py-24 bg-background">
+    <section id="features" className="py-24 bg-background scroll-mt-16">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
@@ -39,7 +39,7 @@ export const FeatureHighlights = () => {
         
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left: Mockup */}
-          <div className="relative animate-scale-in order-2 lg:order-1">
+          <div className="relative animate-scale-in order-2 lg:order-1 cursor-pointer hover:scale-105 transition-transform duration-300">
             <div className="relative z-10">
               <img 
                 src={featureMockup} 

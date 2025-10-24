@@ -12,8 +12,13 @@ const integrations = [
 ];
 
 export const IntegrationsSection = () => {
+  const handleIntegrationClick = (name: string) => {
+    console.log(`Clicked integration: ${name}`);
+    // You can add modal or navigation logic here
+  };
+
   return (
-    <section className="py-24" style={{ background: 'var(--gradient-hero)' }}>
+    <section id="integrations" className="py-24 scroll-mt-16" style={{ background: 'var(--gradient-hero)' }}>
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
@@ -28,6 +33,7 @@ export const IntegrationsSection = () => {
           {integrations.map((integration, index) => (
             <div 
               key={index}
+              onClick={() => handleIntegrationClick(integration.name)}
               className="glass-card rounded-2xl p-6 hover:shadow-hover transition-all duration-300 animate-scale-in cursor-pointer group text-center"
               style={{ animationDelay: `${index * 80}ms` }}
             >
