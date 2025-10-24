@@ -1,4 +1,5 @@
 import { Twitter, Linkedin, Github, Mail } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const footerLinks = {
   Product: ["Features", "Pricing", "Integrations", "API", "Changelog"],
@@ -15,12 +16,20 @@ const socialLinks = [
 ];
 
 export const Footer = () => {
+  const { toast } = useToast();
+  
   const handleLinkClick = (link: string) => {
-    console.log(`Footer link clicked: ${link}`);
+    toast({
+      title: `${link}`,
+      description: "This page is coming soon. Stay tuned!",
+    });
   };
 
   const handleSocialClick = (social: string) => {
-    console.log(`Social link clicked: ${social}`);
+    toast({
+      title: `Follow us on ${social}`,
+      description: "Stay updated with the latest features and news.",
+    });
   };
 
   return (

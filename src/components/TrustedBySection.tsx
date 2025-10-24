@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const companies = [
   "Salesforce", "Google", "Zoom", "Microsoft", "Slack", "Dropbox"
@@ -29,12 +30,20 @@ const testimonials = [
 ];
 
 export const TrustedBySection = () => {
+  const { toast } = useToast();
+  
   const handleCompanyClick = (company: string) => {
-    console.log(`Clicked on: ${company}`);
+    toast({
+      title: `${company} uses AI Meeting`,
+      description: "Join thousands of companies transforming their meetings with AI.",
+    });
   };
 
   const handleTestimonialClick = (name: string) => {
-    console.log(`Clicked testimonial from: ${name}`);
+    toast({
+      title: "Read full story",
+      description: `Learn more about how ${name} uses AI Meeting Assistant.`,
+    });
   };
 
   return (

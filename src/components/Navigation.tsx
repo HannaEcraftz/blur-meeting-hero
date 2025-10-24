@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { useState } from "react";
+import { AuthModal } from "./AuthModal";
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -11,6 +12,8 @@ const navLinks = [
 
 export const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authTab, setAuthTab] = useState<"signin" | "signup">("signup");
   
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -22,15 +25,18 @@ export const Navigation = () => {
   };
   
   const handleGetStarted = () => {
-    // Scroll to pricing section
-    const pricingSection = document.querySelector('#pricing');
-    if (pricingSection) {
-      pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    setAuthTab("signup");
+    setAuthModalOpen(true);
+  };
+  
+  const handleSignIn = () => {
+    setAuthTab("signin");
+    setAuthModalOpen(true);
   };
   
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-background/80 border-b border-border">
+      <AuthModal open={authModalOpen} onOpenChange={setAuthModalOpen} defaultTab={authTab} />
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -58,7 +64,7 @@ export const Navigation = () => {
           
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost" onClick={handleGetStarted}>Sign In</Button>
+            <Button variant="ghost" onClick={handleSignIn}>Sign In</Button>
             <Button variant="hero" onClick={handleGetStarted}>Get Started</Button>
           </div>
           
@@ -86,7 +92,7 @@ export const Navigation = () => {
                 </a>
               ))}
               <div className="flex flex-col gap-2 pt-4">
-                <Button variant="ghost" className="w-full" onClick={handleGetStarted}>Sign In</Button>
+                <Button variant="ghost" className="w-full" onClick={handleSignIn}>Sign In</Button>
                 <Button variant="hero" className="w-full" onClick={handleGetStarted}>Get Started</Button>
               </div>
             </div>

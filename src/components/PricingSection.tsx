@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+import { AuthModal } from "./AuthModal";
 
 const plans = [
   {
@@ -38,13 +41,27 @@ const plans = [
 ];
 
 export const PricingSection = () => {
+  const { toast } = useToast();
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  
   const handlePlanSelect = (planName: string) => {
-    console.log(`Selected plan: ${planName}`);
-    // You can add checkout or signup logic here
+    if (planName === "Free") {
+      setAuthModalOpen(true);
+    } else {
+      toast({
+        title: "Upgrade to Pro",
+        description: "You'll be redirected to checkout. Start your 14-day free trial!",
+      });
+      // Simulate redirect delay
+      setTimeout(() => {
+        setAuthModalOpen(true);
+      }, 1500);
+    }
   };
 
   return (
     <section id="pricing" className="py-24 bg-background scroll-mt-16">
+      <AuthModal open={authModalOpen} onOpenChange={setAuthModalOpen} defaultTab="signup" />
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">

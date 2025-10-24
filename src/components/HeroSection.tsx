@@ -1,24 +1,26 @@
 import { Button } from "@/components/ui/button";
 import { PlayCircle } from "lucide-react";
 import heroMockup from "@/assets/hero-mockup.jpg";
+import { useState } from "react";
+import { VideoModal } from "./VideoModal";
+import { AuthModal } from "./AuthModal";
 
 export const HeroSection = () => {
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+
   const handleGetStarted = () => {
-    const pricingSection = document.querySelector('#pricing');
-    if (pricingSection) {
-      pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    setAuthModalOpen(true);
   };
 
   const handleSeeHow = () => {
-    const featuresSection = document.querySelector('#features');
-    if (featuresSection) {
-      featuresSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    setVideoModalOpen(true);
   };
 
   return (
     <section className="relative overflow-hidden" style={{ background: 'var(--gradient-hero)' }}>
+      <VideoModal open={videoModalOpen} onOpenChange={setVideoModalOpen} />
+      <AuthModal open={authModalOpen} onOpenChange={setAuthModalOpen} defaultTab="signup" />
       <div className="container mx-auto px-6 py-20 lg:py-32">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}

@@ -1,4 +1,5 @@
 import { Video, Mail, Cloud, Database, Calendar, MessageSquare } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const integrations = [
   { name: "Google Meet", icon: Video, color: "from-green-400 to-green-600" },
@@ -12,9 +13,13 @@ const integrations = [
 ];
 
 export const IntegrationsSection = () => {
+  const { toast } = useToast();
+  
   const handleIntegrationClick = (name: string) => {
-    console.log(`Clicked integration: ${name}`);
-    // You can add modal or navigation logic here
+    toast({
+      title: `${name} Integration`,
+      description: "Connect your account in just a few clicks. Available in Pro plan.",
+    });
   };
 
   return (

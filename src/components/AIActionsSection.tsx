@@ -1,4 +1,5 @@
 import { Zap, Target, FileText, TrendingUp } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const actions = [
   {
@@ -28,9 +29,13 @@ const actions = [
 ];
 
 export const AIActionsSection = () => {
+  const { toast } = useToast();
+  
   const handleActionClick = (title: string) => {
-    console.log(`Clicked on: ${title}`);
-    // You can add navigation or modal logic here
+    toast({
+      title: `${title}`,
+      description: "This feature is available in the Pro plan. Sign up to get started!",
+    });
   };
 
   return (
